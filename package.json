@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+    "@sidebase/nuxt-session": "^0.2.7",
     "nuxt": "^3.8.1",
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.8",
