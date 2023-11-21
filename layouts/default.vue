@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <app-bar/>
-    <v-main class="bg-secondary on-secondary">
+    <v-main class="bg-background on-background">
       <slot />
     </v-main>
     <v-footer color="secondary-darken-2">
