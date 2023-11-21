@@ -10,7 +10,7 @@ export default defineNuxtPlugin((app) => {
     blueprint: md3,
     theme: {
       variations: {
-        colors: ['primary', 'secondary'],
+        colors: ['primary', 'secondary', 'background', 'warning'],
         lighten: 4,
         darken: 5,
       },
@@ -19,14 +19,16 @@ export default defineNuxtPlugin((app) => {
           dark: false,
           colors: {
             primary: colors.red.accent4,
-            secondary: colors.grey.lighten2,
+            secondary: '#013540',
+            background: colors.grey.lighten2,
           },
         },
         dark: {
           dark: true,
           colors: {
             primary: colors.red.darken4,
-            secondary: colors.grey.darken4,
+            secondary: '#013540',
+            background: colors.grey.darken4,
           },
         },
       },
