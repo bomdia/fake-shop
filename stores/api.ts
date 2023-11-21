@@ -1,8 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { fetchUserCarts } from '#imports'
+import { fetchUserCarts, postLogin } from '#imports'
 import type { Carts } from '#imports'
 
-const baseUrl = 'https://dummyjson.com'
 export const useApiStore = defineStore('api', () => {
   const isAuthenticated = ref(false)
   const user = ref() as Ref<User>
@@ -11,14 +10,7 @@ export const useApiStore = defineStore('api', () => {
 
   async function login(username: string, password: string) {
     if (isAuthenticated.value) return true
-    const response = await fetch(`${baseUrl}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    })
+    const response = await postLogin(username, password)
     if (response.ok) {
       const loginUser = (await response.json()) as LoginUser
       user.value = await fetchSingleUser(loginUser.id)
@@ -37,11 +29,7 @@ export const useApiStore = defineStore('api', () => {
   }
   async function register(userData: Record<string, any> = {}) {
     if (isAuthenticated.value) return false
-    const response = await fetch(`${baseUrl}/users/add`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    })
+    const response = await postNewUser(userData)
     if (response.ok) {
       errorMsg.value = ''
       return true
