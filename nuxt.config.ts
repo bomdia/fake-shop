@@ -3,6 +3,15 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  imports: {
+    dirs: ['./stores'],
+    global: true,
+  },
+  app: {
+    head: {
+      title: 'Fake Shop',
+    },
+  },
   build: {
     transpile: ['vuetify'],
   },
@@ -14,6 +23,7 @@ export default defineNuxtConfig({
       })
     },
     '@pinia/nuxt',
+    '@sidebase/nuxt-session',
   ],
   vite: {
     vue: {
