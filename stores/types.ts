@@ -99,10 +99,28 @@ export interface Product {
   thumbnail: string
 }
 
+export interface FullProduct {
+  id: number
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  stock: number
+  brand: string
+  category: string
+  thumbnail: string
+  images: string[]
+}
+
 export interface Carts extends MultipleResult {
   carts: Cart[]
 }
 
 export interface Users extends MultipleResult {
   users: User[]
+}
+
+export interface Products extends MultipleResult {
+  products: FullProduct[]
 }

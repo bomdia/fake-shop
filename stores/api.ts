@@ -1,24 +1,26 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { fetchUserCarts, postLogin } from '#imports'
-import type { Carts } from '#imports'
+import type { Carts, LoginUser } from '#imports'
 
 export const useApiStore = defineStore('api', () => {
   const isAuthenticated = ref(false)
   const user = ref() as Ref<User>
   const userCarts = ref() as Ref<Carts>
   const errorMsg = ref('')
+  const token = ref('')
 
   async function login(username: string, password: string) {
     if (isAuthenticated.value) return true
     const response = await postLogin(username, password)
     if (response.ok) {
       const loginUser = (await response.json()) as LoginUser
-      user.value = await fetchSingleUser(loginUser.id)
-      userCarts.value = await fetchUserCarts(loginUser.id)
+      token.value = loginUser.token
+      user.value = await fetchSingleUser(loginUser.id, token.value)
+      userCarts.value = await fetchUserCarts(loginUser.id, token.value)
       errorMsg.value = ''
+      isAuthenticated.value = true
       const router = useRouter()
       await router.push('/')
-      isAuthenticated.value = true
       return true
     } else {
       user.value = undefined
@@ -29,7 +31,7 @@ export const useApiStore = defineStore('api', () => {
   }
   async function register(userData: Record<string, any> = {}) {
     if (isAuthenticated.value) return false
-    const response = await postNewUser(userData)
+    const response = await postNewUser(userData, token.value)
     if (response.ok) {
       errorMsg.value = ''
       return true
@@ -42,6 +44,7 @@ export const useApiStore = defineStore('api', () => {
     if (!isAuthenticated.value) return false
     isAuthenticated.value = false
     user.value = null
+    token.value = ''
     const router = useRouter()
     await router.push('/login')
     return true
@@ -60,11 +63,13 @@ export const useApiStore = defineStore('api', () => {
     if (userCarts.value?.carts) {
       const carts = userCarts.value?.carts as Cart[]
       for (const cart of carts) {
-        resCart.products.push(...cart.products)
-        resCart.total += cart.total
-        resCart.discountedTotal += cart.discountedTotal
-        resCart.totalProducts += cart.totalProducts
-        resCart.totalQuantity += cart.totalQuantity
+        if (cart.products.length > 0) {
+          resCart.products.push(...cart.products)
+          resCart.total += cart.total
+          resCart.discountedTotal += cart.discountedTotal
+          resCart.totalProducts += cart.totalProducts
+          resCart.totalQuantity += cart.totalQuantity
+        }
       }
     }
     return resCart
@@ -72,6 +77,7 @@ export const useApiStore = defineStore('api', () => {
 
   return {
     user,
+    token,
     errorMsg,
     isAuthenticated,
     login,

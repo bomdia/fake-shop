@@ -18,7 +18,7 @@ export default defineNuxtPlugin((app) => {
       )
     }
   }
-  bindKeys('isAuthenticated', 'user', 'userCarts')
+  bindKeys('isAuthenticated', 'user', 'userCarts', 'token')
 })
 
 // import type { Session } from '@sidebase/nuxt-session'
