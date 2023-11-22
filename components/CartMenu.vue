@@ -153,7 +153,7 @@ const formSpedizione = reactive({
   data: {
     address: {
       component: markRaw(VTextField),
-      model: apiStore.user.address.address,
+      model: apiStore.user?.address?.address ?? '',
       vColProps: {
         cols: 8,
       },
@@ -171,7 +171,7 @@ const formSpedizione = reactive({
     },
     postalCode: {
       component: markRaw(VTextField),
-      model: apiStore.user.address.postalCode,
+      model: apiStore.user?.address?.postalCode ?? '',
       vColProps: {
         cols: 4,
       },
@@ -189,7 +189,7 @@ const formSpedizione = reactive({
     },
     city: {
       component: markRaw(VTextField),
-      model: apiStore.user.address.city,
+      model: apiStore.user?.address?.city ?? '',
       vColProps: {
         cols: 12,
       },
@@ -207,7 +207,7 @@ const formSpedizione = reactive({
     },
     state: {
       component: markRaw(VTextField),
-      model: apiStore.user.address.state,
+      model: apiStore.user?.address?.state ?? '',
       vColProps: {
         cols: 12,
       },
