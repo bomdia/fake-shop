@@ -4,7 +4,7 @@
     <v-app-bar-title>
       {{ appStore.title }}
     </v-app-bar-title>
-    <v-spacer/>
+    <v-spacer v-if="apiStore.isAuthenticated"/>
     <theme-btn />
     <cart-menu />
     <user-menu />
@@ -12,4 +12,5 @@
 </template>
 <script setup lang="ts">
 const appStore = useAppStore()
+const apiStore = useApiStore()
 </script>
