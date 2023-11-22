@@ -31,16 +31,17 @@
         hide-actions 
         class="no-margin"
         color="secondary"
+        bg-color="secondary-darken-1"
       >
         <template v-slot:item.1>
-          <v-list color="secondary">
+          <v-list class="bg-secondary on-secondary">
             <v-list-item 
               v-for="product of products" 
               :key="`cart-product-${product.id}`"
               :prepend-avatar="product.thumbnail"
               :title="product.title"
               :to="`/product/${product.id}`"
-              color="secondary"
+              class="bg-secondary on-secondary"
             >
               <v-list-item-subtitle>
                 <v-row>
@@ -69,7 +70,7 @@
               </v-row>
             </v-container>
           </v-toolbar>
-          <v-card-actions>
+          <v-card-actions class="bg-secondary on-secondary">
             <v-spacer/>
             <v-btn @click="removeAllProducts()" icon="mdi-close" block/>
             <v-spacer/>
@@ -78,18 +79,18 @@
 
         <template v-slot:item.2>
           <v-form @submit.prevent="formSpedizione.submit.action">
-        <v-container>
-          <v-row class="bg-secondary">
-            <v-col v-for="(value, key) in formSpedizione.data" :key="`register-form-${key}`" v-bind="value.vColProps">
-              <component :is="value.component" v-bind="value.props" v-on="value.on" v-model="value.model"/>
-            </v-col>
-          </v-row>
-        </v-container>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn type="submit" :color="formSpedizione.submit.color">{{ formSpedizione.submit.name }}</v-btn>
-        </v-card-actions>
-      </v-form>
+            <v-container>
+              <v-row class="bg-secondary">
+                <v-col v-for="(value, key) in formSpedizione.data" :key="`register-form-${key}`" v-bind="value.vColProps">
+                  <component :is="value.component" v-bind="value.props" v-on="value.on" v-model="value.model"/>
+                </v-col>
+              </v-row>
+            </v-container>
+            <v-card-actions>
+              <v-spacer/>
+              <v-btn type="submit" :color="formSpedizione.submit.color">{{ formSpedizione.submit.name }}</v-btn>
+            </v-card-actions>
+          </v-form>
         </template>
 
         <template v-slot:item.3>
