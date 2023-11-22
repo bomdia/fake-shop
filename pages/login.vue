@@ -43,7 +43,7 @@
     width="auto"
   >
     <v-card>
-      <v-card-title>
+      <v-card-title class="d-flex">
         <v-spacer/>
         <v-btn density="compact" color="primary" icon="mdi-close" @click="form.submit.showErrorPopup = false"></v-btn>
       </v-card-title>
@@ -85,7 +85,6 @@ const form = reactive({
       model: '',
       vColProps: {
         cols: 12,
-        md: 6,
       },
       props: {
         label: "Username",
@@ -100,7 +99,6 @@ const form = reactive({
       model: '',
       vColProps: {
         cols: 12,
-        md: 6
       },
       props: {
         type: computed(() => form.data.password.showCharacters ? 'text' : 'password'),
