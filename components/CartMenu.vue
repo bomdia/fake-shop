@@ -153,7 +153,10 @@ const formSpedizione = reactive({
   data: {
     address: {
       component: markRaw(VTextField),
-      model: apiStore.user?.address?.address ?? '',
+      model: computed({
+        get: () => apiStore.user?.address?.address ?? '',
+        set: (val) => { if (apiStore.user?.address?.address) apiStore.user.address.address = val }
+      }),
       vColProps: {
         cols: 8,
       },
@@ -171,7 +174,10 @@ const formSpedizione = reactive({
     },
     postalCode: {
       component: markRaw(VTextField),
-      model: apiStore.user?.address?.postalCode ?? '',
+      model: computed({
+        get: () => apiStore.user?.address?.postalCode ?? '',
+        set: (val) => { if (apiStore.user?.address?.postalCode) apiStore.user.address.postalCode = val }
+      }),
       vColProps: {
         cols: 4,
       },
@@ -189,7 +195,10 @@ const formSpedizione = reactive({
     },
     city: {
       component: markRaw(VTextField),
-      model: apiStore.user?.address?.city ?? '',
+      model: computed({
+        get: () => apiStore.user?.address?.city ?? '',
+        set: (val) => { if (apiStore.user?.address?.city) apiStore.user.address.city = val }
+      }),
       vColProps: {
         cols: 12,
       },
@@ -207,7 +216,10 @@ const formSpedizione = reactive({
     },
     state: {
       component: markRaw(VTextField),
-      model: apiStore.user?.address?.state ?? '',
+      model: computed({
+        get: () => apiStore.user?.address?.state ?? '',
+        set: (val) => { if (apiStore.user?.address?.state) apiStore.user.address.state = val }
+      }),
       vColProps: {
         cols: 12,
       },
