@@ -24,10 +24,17 @@ export const useAppStore = defineStore('app', () => {
     darkThemeMq.addEventListener('change', (evnt) => {
       if (useSystemTheme.value) isDarkTheme.value = evnt.matches
     })
+    watch(useSystemTheme, (val) => {
+      if (val) {
+        const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)')
+        isDarkTheme.value = darkThemeMq.matches
+      }
+    })
   }
-
+  const darkThemeIcon = ref('mdi-weather-night')
+  const lightThemeIcon = ref('mdi-brightness-7')
   const currentThemeIcon = computed(() =>
-    isDarkTheme.value ? 'mdi-weather-night' : 'mdi-brightness-7'
+    isDarkTheme.value ? darkThemeIcon.value : lightThemeIcon.value
   )
   function toggleTheme() {
     if (!useSystemTheme.value) isDarkTheme.value = !isDarkTheme.value
@@ -39,6 +46,8 @@ export const useAppStore = defineStore('app', () => {
     isDarkTheme,
     useSystemTheme,
     currentThemeIcon,
+    darkThemeIcon,
+    lightThemeIcon,
     toggleTheme,
   }
 })

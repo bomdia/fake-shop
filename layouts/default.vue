@@ -4,9 +4,7 @@
     <v-main class="bg-background on-background">
       <slot />
     </v-main>
-    <v-footer color="secondary-darken-2">
-      footer
-    </v-footer>
+    <app-footer/>
   </v-app>
 </template>
 <script setup lang="ts">
